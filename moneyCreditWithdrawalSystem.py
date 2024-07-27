@@ -1,49 +1,48 @@
-class moneyCreditWithdrawSystem:
-    # Constructor for the moneyCreditWithdrawSystem class.
-    def __init__(self) -> None:
+class moneyCreditWithdrawlSystem:
+    # Constructor method __init__ for initializing the object
+    def __init__ (self):
         pass
-    
-    # Method to initialize the entrance process.
+    # Method for handling the entrance process
     def entrance_process_init(self):
-        # Check if the retry limit has not been exceeded.
         if self.entrance_retry < 3:
-            # Displaying the options for the user to choose from.
-            print('''Please select your options from below:
-                1. Enter 1 for Registration 
-                2. Enter 2 for Login
-                ''')
-            # Taking user input for the entrance process.
-            self.enter_process = int(input())
-            print(self.enter_process)
-            
-            # Navigate to Registration process if the user selects option 1.
+            print('''Please select your options in below
+                1.Enter 1 for Registration
+                2.Enter 2 for Login
+                ''') 
+            try:
+               self.enter_process = int(input())
+            except Exception as e:
+                self.entrance_retry += 1
+                if self.entrance_retry != 3:
+                    print(f"Please enter only numeric values. Your input {str(e).split()[-1]} is not valid")
+                 
+                self.entrance_process_init()                  
+                return False
+           # print(self.enter_process)
             if self.enter_process == 1:
                 print("Navigating to Registration")
-            # Navigate to Login process if the user selects option 2.
             elif self.enter_process == 2:
                 print("Navigating to Login")
-            # If the user enters an invalid option, prompt them to choose again.
-            else:
-                print("Please choose the correct entrance process number: 1 or 2")
-                # Increment the retry counter.
+            else :
                 self.entrance_retry += 1
-                # Call the method again for a valid input.
+                if self.entrance_retry != 3:
+                    print("Please enter correct entrance process number as 1 or 2")
+                
                 self.entrance_process_init()
-        else:
-            # If retry limit exceeded, inform the user and terminate the process.
-            print("Entrance process retry exceeded over 3 times. Unfortunately, we can't process your request due to incorrect input.")
-
-# Defining the main function.
-# The project process starts from here.
+                
+        else : 
+            print("Entrance process retries exceeded over 3 times. Unfortunately we can't process your request due to incorrect input")        
+            
+# Defining a main Function.
+# The project process starts from here
 if __name__ == '__main__':
-    # Printing the welcome message to the user.
-    print('Hi, Welcome to Money Credit Withdrawal System')
-    print('I am assisting with credit and withdrawal from your bank account')
-   
-    # Creating an object for the moneyCreditWithdrawSystem class.
-    main_object = moneyCreditWithdrawSystem()
-    
-    # Assigning an entrance_retry variable to control wrong information from the user during the entrance process.
+    # Printing Welcome messages to user 
+    print('Hi,Welcome to Money Credit Witdral System')
+    print('I am assesting for credit and withdrawl money from your bank account')
+
+    # Creating a object for "moneyCreditWithdrawlSystem" class
+    main_object = moneyCreditWithdrawlSystem()
+    # Assigning a "entrance_retry" variable to control  wrong information from user at entrance process
     main_object.entrance_retry = 0
-    # Calling the entrance process method.
+    # Call the entrance process method to start the interaction with the user
     main_object.entrance_process_init()
